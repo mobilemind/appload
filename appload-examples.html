@@ -16,7 +16,7 @@
 	<body>
 		<p>Examples to call apps via URL to this page that will in turn redirect using app protocol scheme.</p>
 		<ul>
-			<li><b>Simple case</b>- Text &ldquo;HELP&rdquo; to Dominos (366466) to order pizza by SMS<br>
+			<li><b>Simplest case (no encoding)</b>- Text to Dominos (366466) to order pizza by SMS<br>
 				<a href="http://mmind.me/appload.htm?target=sms:366466" title="SMS Text to Dominos (366466)">
 					http://mmind.me/appload.htm?target=sms:366466
 				</a>
@@ -33,6 +33,12 @@
 			</li>
 		</ul>
 		<p>Examples using form buttons and JavaScript. Helpful because something may need to be DOUBLE encoded.</p>
+		<p>Simple case is something like:</p>
+		<p>
+			<code>
+				myRedirectURL = 'http://mmind.me/appload.htm?target=' + encodeURIComponent(myTargetAppURL);
+			</code>
+		</p>
 		<p></p><i>Examples not done yet.</i><p>
 		<!-- don't try these yet; they are just notes to myself -->
 		<!-- 
