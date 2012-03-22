@@ -1,0 +1,51 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="keywords" content="sample,example,demo,how to,appload,redirect,reload,iOS,protocol,scheme,iBook,app">
+		<meta name="robots" content="noindex,nofollow">
+		<meta name="MSSmartTagsPreventParsing" content="true">
+		<title>appload.htm redirect examples</title>
+		<!-- appload-examples.html
+				redirect http://mmind.me/appload.htm?target=URI to 'URI'
+				assumes 'URI a web protocol URL or an iOS app URI scheme
+				also assumes URI was previously encoded via encodeURIcomponent(URI)
+		-->
+	</head>
+	<body>
+		<p>Examples to call apps via URL to this page that will in turn redirect using app protocol scheme.</p>
+		<ul>
+			<li><b>Simple case</b>- Text &ldquo;HELP&rdquo; to Dominos (366466) to order pizza by SMS<br>
+				<a href="http://mmind.me/appload.htm?target=sms:366466" title="SMS Text to Dominos (366466)">
+					http://mmind.me/appload.htm?target=sms:366466
+				</a>
+			</li>
+			<li><b>Basic URI encoding</b>- Email to &ldquo;Mobilemind&rdquo;<br>
+				<a href="http://mmind.me/appload.htm?target=mailto%3Amobilemind%40pobox.com%3Fsubject%3DHi%20there" title="Email to Mobilemind">
+					http://mmind.me/appload.htm?target=mailto%3Amobilemind%40pobox.com%3Fsubject%3DHi%20there
+				</a>
+			</li>
+						<li><b>Basic URI encoding</b>- Search IMDB for &ldquo;Caddyshack&rdquo;<br>
+				<a href="http://mmind.me/appload.htm?target=imdb%3A%2F%2F%2Ffind%3Fq%3Dcaddyshack" title="Search IMDB for Caddyshack">
+					http://mmind.me/appload.htm?target=imdb%3A%2F%2F%2Ffind%3Fq%3Dcaddyshack
+				</a>
+			</li>
+		</ul>
+		<p>Examples using form buttons and JavaScript. Helpful because something may need to be DOUBLE encoded.</p>
+		<p></p><i>Examples not done yet.</i><p>
+		<!-- don't try these yet; they are just notes to myself -->
+		<!-- 
+		<form id="apploadForm" method="POST" action="." onSubmit="return false">
+			<input type="button" id="twitterBtnOpen" onclick="twitter://">
+			<br><br>
+			<input type="button" id="twitterifficBtnPost" onclick="twitterrific:///post?message=%@">
+			<br><br>
+			note need to DOUBLE encode
+			<input type="button" id="twittelatorBtn"onclick="encodeURIComponent('twit:///post?message=' + encodeURIComponent('Thanks. I just tried your appload.htm from github')+ '&replyToScreenName=mobilemind'">
+			<br><br>
+		</form>
+		-->
+
+	</body>
+</html>
