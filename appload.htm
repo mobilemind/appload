@@ -3,8 +3,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <meta name="keywords" content="appload,redirect,iOS,protocol,scheme,iBooks">
-<meta name="robots" content="noindex,nofollow">
-<meta name="MSSmartTagsPreventParsing" content="true">
+<meta name="robots" content="index,nofollow">
 <link rel="canonical" href="http://mmind.me/appload.htm">
 <title>appload</title>
 <!--
@@ -13,22 +12,29 @@ assumes 'URI a web protocol URL or an iOS app URI scheme
 also assumes URI was previously encoded via encodeURIcomponent(URI)
 -->
 <script type="text/javascript">
+//<!--
 function appload()	{
 	try {
-		var queryString = location.search.substr(1), matchedString = [];
-		if (!queryString) throw 'No query string in URL ' + location.href;
-		matchedString = queryString.match(/^target=(.*)$/);			
-		if (!matchedString) throw 'No target found in query string ' + queryString;
-		if (matchedString[1].length < 2) throw 'Query string has invalid target ' + matchedString[1];
-		else location.href = decodeURIComponent(matchedString[1]);
+		var queryString = location.search.substr(1), matchedString = [], t = '', f = document.getElementById("f");
+		if (!queryString) throw 'No query string in URL- ' + location.href;
+		matchedString = queryString.match(/^target=(.*\:.*)$/);
+		if (!matchedString) throw "Missing 'target=' or protocol in query string- " + queryString;
+		t = decodeURIComponent(matchedString[1]);
+		if (!t || t.length < 2) throw 'Target has invalid protocol- ' + matchedString[1];
+		location.href = t;
 	}
 	catch (e) {
-		console.log('error: ' + e);
-		alert("Unable to process query string. Details in console.");
+		console.error('error: ' + e);
+		if (f) {
+			f.contentDocument.getElementsByTagName('body')[0].innerHTML = "Can't navigate to " + (matchedString ? t : 'null') + " (" +  e + ")";
+			f.hidden=false;
+		}
+		else alert("Unable to process query string. Details in console.");
 	}
 	return;
 }
+// -->
 </script>
 </head>
-<body onload="appload()"></body>
+<body onload="appload()"><iframe id="f" hidden seamless></iframe></body>
 </html>
