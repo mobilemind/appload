@@ -18,10 +18,10 @@ function appload()	{
 	try {
 		var queryString = location.search.substr(1), matchedString = [], targetURL = '', frameID = document.getElementById("messageFrame");
 		if (!queryString) throw 'No query string in URL: ' + location.href;
-		matchedString = queryString.match(/^target=(.*\:.*)$/);
+		matchedString = queryString.match(/^target=(.*)$/);
 		if (!matchedString) throw "Missing protocol or 'target=' in query string: ?" + queryString;
 		targetURL = decodeURIComponent(matchedString[1]);
-		if (!targetURL || targetURL.length < 2) throw 'Target has invalid protocol: ' + matchedString[1];
+		if (!targetURL || targetURL.length < 2 || targetURL.indexOf(':') < 1) throw 'Target has invalid protocol: ' + matchedString[1];
 		location.href = targetURL;
 	}
 	catch (e) {
