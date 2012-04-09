@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta name="keywords" content="appload,redirect,iOS,protocol,scheme,iBooks">
+<meta name="robots" content="index,nofollow">
+<meta name="viewport" content="width=device-width,user-scalable=no">
+<link rel="canonical" href="http://mmind.me/appload.htm">
+<title>appload  _MmVERSION_</title>
+<!-- appload  v_MmVERSION_ _MmBUILDDATE_
+redirect http://mmind.me/appload.htm?target=URI to 'URI'
+assumes 'URI a web protocol URL or an iOS app URI scheme
+also assumes URI was previously encoded via encodeURIcomponent(URI)
+-->
+<script type="text/javascript">
+//<!--
+function appload()	{
+	try {
+		var queryString = location.search.substr(1), matchedString = [], targetURL = '', frameID = document.getElementById("messageFrame");
+		if (!queryString) throw 'No query string in URL: ' + location.href;
+		matchedString = queryString.match(/^target=(.*\:.*)$/);
+		if (!matchedString) throw "Missing protocol or 'target=' in query string: ?" + queryString;
+		targetURL = decodeURIComponent(matchedString[1]);
+		if (!targetURL || targetURL.length < 2) throw 'Target has invalid protocol: ' + matchedString[1];
+		location.href = targetURL;
+	}
+	catch (e) {
+		window.console ? console.debug(e) : alert(e);
+		if (frameID) {
+			frameID.width = innerWidth - 20;
+			frameID.contentDocument.getElementsByTagName('body')[0].innerHTML = "Can't navigate to: " + (matchedString ? targetURL : 'null') + " (" +  e + ")";
+			frameID.hidden = false;
+		}
+	}
+	return true;
+}
+// -->
+</script>
+</head>
+<body onload="appload()"><iframe id="messageFrame" hidden seamless></iframe></body>
+</html>
