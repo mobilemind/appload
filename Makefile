@@ -47,7 +47,9 @@ web/%.gz: web/%
 .PHONY: deploy
 deploy: default
 	@(printf "\n\tDeploy to: $$MYSERVER/me\n"; \
-		scp -2Bp $(WEBDIR)/*.htm $(WEBDIR)/*.gz "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me" && \
+		scp -2Bp web/appload.htm.gz "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/appload.htm" && \
+		scp -2Bp web/appload-examples.htm.gz "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/appload-examples.htm"; \
+		scp -2Bp web/appload-examples.htm.gz "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/appload-examples.html" && \
 		$(GRECHO) '\nmake:' "Deployed $(PROJ) to $$MYSERVER/me\n" \
 	)
 
