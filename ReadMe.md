@@ -9,7 +9,8 @@ A very simple example is:
 
 ## Install ##
 
-No installation required, a [hosted Appload page](http://mmind.me/appload) is a available for use.
+No installation required, a minimized & compressed [hosted Appload page](http://mmind.me/appload.htm) 
+is a available for use.
 
 I plan to also host it here on github via gh-pages
 
@@ -28,6 +29,10 @@ or if you choose to pre-encode a URL something like imdb:///find?q=caddyshack be
 
     http://mmind.me/appload.htm?target=imdb%3A%2F%2F%2Ffind%3Fq%3Dcaddyshack
  
+**Examples**
+
+Example calls are also [available online](http://mmind.me/appload-examples.htm).
+
 **Android** (or maybe iOS apps other than iBooks, too?)
 
 A use case for Android, other platform, or other iOS apps is unclear to me.
