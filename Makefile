@@ -43,13 +43,13 @@ IMG:
 # deploy
 .PHONY: deploy
 deploy: default
-	@printf "\n\tDeploy to: $$MYSERVER/me\n"
+	@printf "\n\tDeploy to: http://$$MYSERVERHOME/me/appload.htm, http://$$MYSERVERHOME/me/appload-examples.htm\n"
 	@rsync -pt web/appload-examples.htm.gz "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/appload-examples.htm"
 	@rsync -pt web/appload-examples.htm.gz "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/appload-examples.html"
 	@rsync -ptv web/appload.htm.gz "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/appload.htm"
 	@rsync -ptv web/appload.manifest "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me"
 	@rsync -pt web/img/*.* "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/img"
-	@$(GRECHO) '\nmake:' "Deployed appload v$(VERSION) to $$MYSERVER/me\n"
+	@$(GRECHO) '\nmake:' "Deployed appload v$(VERSION) to http://$$MYSERVERHOME/me/appload.htm\n"
 
 .PHONY: clean
 clean:
