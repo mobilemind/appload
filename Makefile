@@ -2,7 +2,7 @@
 
 ##
 # appload PROJECT
-##
+PROJ := appload
 
 # directories/paths
 COMMONLIB := $$HOME/common/lib
@@ -18,7 +18,7 @@ REPLACETOKENS = perl -pi -e 's/_MmVERSION_/$(VERSION)/g;s/_MmBUILDDATE_/$(shell 
 
 # replace tokens, then check with tidy & jsl (JavaScript Lint)
 default: web/appload.htm web/appload.manifest web/appload-examples.htm web/appload.htm.gz web/appload-examples.htm.gz $(VERSIONTXT) | IMG
-	@$(GRECHO) '\nmake:' 'Done.'
+	@$(GRECHO) '\nmake $(PROJ):' 'Done.'
 
 web/%.htm: src/%.htm
 	@printf "\n$^: compress with htmlcompressor-1.5.2.jar to $@\n"
@@ -49,7 +49,7 @@ deploy: default
 	@rsync -ptv web/appload.htm.gz "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/appload.htm"
 	@rsync -ptv web/appload.manifest "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me"
 	@rsync -pt web/img/*.* "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/img"
-	@$(GRECHO) '\nmake:' "Deployed appload v$(VERSION) to http://$$MYSERVERHOME/me/appload.htm\n"
+	@$(GRECHO) '\nmake $(PROJ):' "Deployed appload v$(VERSION) to http://$$MYSERVERHOME/me/appload.htm\n"
 
 .PHONY: clean
 clean:
