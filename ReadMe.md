@@ -1,52 +1,46 @@
-# Appload #
+# Appload
 
-Appload is a simple page that does a Javascript-based redirect to a URL parameter.
-Use this to help launch an iOS app using the URL protocol scheme for the app from an iBooks hyperlink.
+Appload is a simple page that does a Javascript-based redirect to a URL parameter. Use
+this to help launch an iOS app using the URL protocol scheme for the app from an iBooks
+hyperlink.
 
-A very simple example is:
+A very simple example to start the Message app is:
 
-        http://mmind.me/appload.htm?target=sms:366466
+<http://mmind.me/appload.htm?target=sms:366466>
 
-## Install ##
-
-No installation required, a minimized & compressed [hosted Appload page](http://mmind.me/appload.htm) 
-is a available for use.
+# Install
+No installation required, a minimized & compressed
+[hosted Appload page](http://mmind.me/appload.htm "appload") is a available for use.
 
 I plan to also host it here on github via gh-pages
 
-## Use ##
+# Use
 
-**iBooks**
-
+## iBooks
 Add a regular hyperlink to your iBooks app that would normally just open Mobile Safari.
 Make the href/URL of the hyperlink point to one of the hosted Appload pages and append
 an URI encoded version of the desired app's URI protocol scheme-- _specificially_ use
-JavaScript <code>encodeURIComponent(string)</code>. For example:
+JavaScript `encodeURIComponent(string)`. For example:
 
     myRedirectURL = 'http://mmind.me/appload.htm?target=' + encodeURIComponent(myTargetAppURL);
 
-or if you choose to pre-encode a URL something like imdb:///find?q=caddyshack becomes
+or if you choose to pre-encode a URL like `imdb:///find?q=caddyshack` becomes
 
-    http://mmind.me/appload.htm?target=imdb%3A%2F%2F%2Ffind%3Fq%3Dcaddyshack
+<http://mmind.me/appload.htm?target=imdb%3A%2F%2F%2Ffind%3Fq%3Dcaddyshack>
  
-**Examples**
-
-Example calls are also [available online](http://mmind.me/appload-examples.htm).
-
-**Android** (or maybe iOS apps other than iBooks, too?)
-
-A use case for Android, other platform, or other iOS apps is unclear to me.
+## Android or other platforms
+A use case for Android, another platform, or other iOS apps is unclear to me.
 If you have one, let me know. I'm willing to adapt or extend this project.
 
-## Compatibility ##
+# Examples
+Example calls are also available online at: <http://mmind.me/appload-examples.htm>.
 
+# Compatibility
 Intended for use with iBooks 2.x or higher on iOS 5.1 or higher.
 
-____
+# License
 
-## License ##
-
-MIT License - [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
+MIT License - <http://www.opensource.org/licenses/mit-license.php>
 
 Appload
 Copyright (c) 2012 Tom King <mobilemind@pobox.com>
