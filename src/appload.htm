@@ -20,8 +20,10 @@
 		<script type="text/javascript">
 		//<!--
 		function appload()	{
+			var queryString = '', matchedString = [], targetURL = '', frameID;
 			try {
-				var queryString = location.search.substr(1), matchedString = [], targetURL = '', frameID = document.getElementById('messageFrame');
+				queryString = location.search.substr(1);
+				frameID = document.getElementById('messageFrame');
 				if (!queryString) throw 'No query string in URL: ' + location.href;
 				matchedString = queryString.match(/^target=(.*)$/);
 				if (!matchedString) throw "Missing protocol or 'target=' in query string: ?" + queryString;
