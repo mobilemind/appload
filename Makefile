@@ -9,7 +9,8 @@ COMMONLIB := $$HOME/common/lib
 
 # macros/utils
 VERSION := $(shell head -1 src/VERSION)
-HTMLCOMPRESSORPATH := $(shell [[ 'cygwin' == $$OSTYPE ]] && echo "`cygpath -w $(COMMONLIB)`\\" || echo "$(COMMONLIB)/")
+HTMLCOMPRESSORPATH := $(shell [[ 'cygwin' == $$OSTYPE ]] && echo "`cygpath -w $(COMMONLIB)`\\" || echo "$(COMMONLIB)")
+HTMLCOMPRESSOR := 'htmlcompressor-1.5.3.jar'
 COMPRESSOPTIONS := -t html -c utf-8 --remove-quotes --remove-intertag-spaces --remove-surrounding-spaces min  --preserve-semi --compress-js
 TIDY := $(shell hash tidy-html5 2>/dev/null && echo 'tidy-html5' || (hash tidy 2>/dev/null && echo 'tidy' || exit 1))
 JSL := $(shell hash jsl 2>/dev/null && echo 'jsl' || exit 1)
@@ -21,8 +22,8 @@ default: web/appload.htm web/appload.manifest web/appload-examples.htm web/applo
 	@$(GRECHO) '\nmake $(PROJ):' 'Done.'
 
 web/%.htm: src/%.htm
-	@printf "\n$^: compress with htmlcompressor-1.5.2.jar to $@\n"
-	@java -jar '$(HTMLCOMPRESSORPATH)htmlcompressor-1.5.2.jar' $(COMPRESSOPTIONS) -o web/ $^
+	@[ -f '$(HTMLCOMPRESSORPATH)/$(HTMLCOMPRESSOR)' ] || ! echo "ERROR: missing $(HTMLCOMPRESSORPATH)/$(HTMLCOMPRESSOR)"
+	@java -jar '$(HTMLCOMPRESSORPATH)/$(HTMLCOMPRESSOR)' $(COMPRESSOPTIONS) -o web/ $^
 	@echo "$@: validate with $(TIDY) and $(JSL)"
 	@$(REPLACETOKENS)
 	@$(TIDY) -eq $@ || [[ $$? -lt 2 ]]
