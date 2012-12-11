@@ -14,12 +14,14 @@ HTMLCOMPRESSOR := 'htmlcompressor-1.5.3.jar'
 COMPRESSOPTIONS := -t html -c utf-8 --remove-quotes --remove-intertag-spaces --remove-surrounding-spaces min  --preserve-semi --compress-js
 TIDY := $(shell hash tidy-html5 2>/dev/null && echo 'tidy-html5' || (hash tidy 2>/dev/null && echo 'tidy' || exit 1))
 JSL := $(shell hash jsl 2>/dev/null && echo 'jsl' || exit 1)
-GRECHO = $(shell hash grecho &> /dev/null && echo 'grecho' || echo 'printf')
+GRECHO := $(shell hash grecho &> /dev/null && echo 'grecho' || echo 'printf')
 REPLACETOKENS = perl -pi -e 's/_MmVERSION_/$(VERSION)/g;s/_MmBUILDDATE_/$(shell date)/g;' $@
+
+.PHONY: IMG deploy clean
 
 # replace tokens, then check with tidy & jsl (JavaScript Lint)
 default: web/appload.htm web/appload.manifest web/appload-examples.htm web/appload.htm.gz web/appload-examples.htm.gz $(VERSIONTXT) | IMG
-	@$(GRECHO) '\nmake $(PROJ):' 'Done.'
+	@$(GRECHO) '\nmake $(PROJ):' 'Done.\n'
 
 web/%.htm: src/%.htm
 	@[ -f '$(HTMLCOMPRESSORPATH)/$(HTMLCOMPRESSOR)' ] || ! echo "ERROR: missing $(HTMLCOMPRESSORPATH)/$(HTMLCOMPRESSOR)"
@@ -37,12 +39,10 @@ web/%.manifest: src/%.manifest
 	@printf "\ncreate $@\n"
 	@cp -fpv $^ $@ && $(REPLACETOKENS)
 
-.PHONY: IMG
 IMG:
 	@rsync -uptv src/img/*.* web/img
 
 # deploy
-.PHONY: deploy
 deploy: default
 	@printf "\n\tDeploy to: http://$$MYSERVER/me/appload.htm, http://$$MYSERVER/me/appload-examples.htm\n"
 	@rsync -pt web/appload-examples.htm.gz "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/appload-examples.htm"
@@ -52,6 +52,5 @@ deploy: default
 	@rsync -pt web/img/*.* "$$MYUSER@$$MYSERVER:$$MYSERVERHOME/me/img"
 	@$(GRECHO) '\nmake $(PROJ):' "Deployed appload v$(VERSION) to http://$$MYSERVER/me/appload.htm\n"
 
-.PHONY: clean
 clean:
 	rm -Rf web/*
